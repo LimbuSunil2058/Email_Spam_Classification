@@ -8,7 +8,8 @@ from nltk.stem import WordNetLemmatizer
 from bs4 import BeautifulSoup
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import nltk
+nltk.download('punkt')
 # Load the trained pipeline
 pipeline = joblib.load('pipeline.pkl')
 
