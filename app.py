@@ -10,7 +10,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import nltk
 import nltk
-nltk.data.path.append('./nltk_data')
+import nltk
+import os
+nltk.data.path.append(os.path.join(os.getcwd(), 'nltk_data'))
+
+# Check if we're in Render environment
+if "RENDER" in os.environ:
+    nltk.download('punkt')
+    nltk.download('stopwords')
 
 # Load the trained pipeline
 pipeline = joblib.load('pipeline.pkl')
