@@ -1,45 +1,6 @@
 import streamlit as st
 import joblib 
 import re
-import os
-import nltk
-
-# Set explicit paths for NLTK data
-nltk_data_path = os.path.join(os.getcwd(), 'nltk_data')
-os.environ['NLTK_DATA'] = nltk_data_path 
-nltk.data.path.append(nltk_data_path)   
-
-# Debugging: Print current paths (remove in production)
-print("Current working directory:", os.getcwd())
-print("NLTK search paths:", nltk.data.path)
-
-# Download required resources with explicit paths
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    print("Downloading punkt...")
-    nltk.download('punkt', download_dir=nltk_data_path)
-
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    print("Downloading stopwords...")
-    nltk.download('stopwords', download_dir=nltk_data_path)
-
-# Special handling for punkt_tab
-try:
-    nltk.data.find('tokenizers/punkt_tab')
-except LookupError:
-    print("punkt_tab not found - using punkt instead")
-    # Workaround: Copy punkt to punkt_tab if needed
-    punkt_path = os.path.join(nltk_data_path, 'tokenizers', 'punkt')
-    punkt_tab_path = os.path.join(nltk_data_path, 'tokenizers', 'punkt_tab')
-    
-    if os.path.exists(punkt_path) and not os.path.exists(punkt_tab_path):
-        print("Creating symlink from punkt to punkt_tab")
-        os.symlink(punkt_path, punkt_tab_path)
-
-# Now import other NLTK components
 from nltk.corpus import stopwords, wordnet
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
@@ -47,6 +8,9 @@ from nltk.stem import WordNetLemmatizer
 from bs4 import BeautifulSoup
 import pandas as pd
 import matplotlib.pyplot as plt
+import nltk
+nltk.download('punkt')
+
 
 # Load the trained pipeline
 pipeline = joblib.load('pipeline.pkl')
