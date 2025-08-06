@@ -1,6 +1,6 @@
 streamlit
 joblib
-nltk
+nltk==3.8.1
 beautifulsoup4
 pandas
 scikit-learn
