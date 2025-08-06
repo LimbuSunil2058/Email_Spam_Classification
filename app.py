@@ -9,7 +9,9 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import matplotlib.pyplot as plt
 import nltk
-nltk.download('punkt')
+import nltk
+nltk.data.path.append('./nltk_data')
+
 # Load the trained pipeline
 pipeline = joblib.load('pipeline.pkl')
 
